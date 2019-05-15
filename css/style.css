@@ -14,18 +14,24 @@ button {
 
 body {
   font: 1em/1.5;
-  color: #184f68;
-	background: #accbd9;
+	color: #8f26eb;
+	background: linear-gradient(to top, #9f7df5, #8f26eb);
+	background-attachment: fixed;
 }
 
 header {
 	text-align: center;  
+	color: #fff;
 }
 
+
+
 h1 {
-	font-size: 2.5em;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+	font-size: 4.5em;
 	margin: 0;
+	transform: rotate(-7deg);
+	font-family: 'Sriracha', cursive;
+	text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 a {
@@ -38,7 +44,10 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #85b5ca;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	margin-bottom: 100px;
 }
 
 fieldset,
@@ -60,7 +69,7 @@ button {
 legend {
 	font-weight: 500;
 	padding-top: .5em;
-	border-top: 2px solid #679cb3;
+	border-top: 2px solid #8f26eb;
 	margin-bottom: 1.125em;
 }
 
@@ -85,15 +94,20 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #c1deeb;
-	border: 2px solid #c1deeb;
+	background: #d3c2fd;
+	border: 2px solid #d3c2fd;
 	outline: none;
 }
 
 input:focus {
 	background: #fff;
-	border-color: #5e97b0;
+	border-color: #d3c2fd;
 	transition: border-color .4s, background-color .4s;
+}
+
+
+select {
+	padding: .8em .8em .8em .4em;
 }
 
 input[type="checkbox"],
@@ -104,13 +118,15 @@ input[type="radio"] {
 button {
 	color: #fff;
 	padding: .55em 1.25em;
-	background: #22627e;
+	background: #9f7df5;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
+	transition: background 0.2s;
 }
 
 button:hover {
-	background: #184c62;
+	background: #8f26eb;
+
 }
 
 /* ================================= 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Register for Full Stack Conf</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Sriracha' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -56,7 +57,7 @@
         <div>
           <label for="design">Design:</label>
           <select id="design" name="user_design">
-            <option>Select Theme</option>
+            <option value="select">Select Theme</option>
             <option value="js puns">Theme - JS Puns</option>
             <option value="heart js">Theme - I &#9829; JS</option>
           </select>
@@ -65,12 +66,12 @@
         <div id="colors-js-puns" class="">
           <label for="color">Color:</label>
           <select id="color">
-            <option value="cornflowerblue">Cornflower Blue (JS Puns shirt only)</option>
-            <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option> 
-            <option value="gold">Gold (JS Puns shirt only)</option> 
-            <option value="tomato">Tomato (I &#9829; JS shirt only)</option>
-            <option value="steelblue">Steel Blue (I &#9829; JS shirt only)</option> 
-            <option value="dimgrey">Dim Grey (I &#9829; JS shirt only)</option> 
+            <option value="cornflowerblue" data-theme="puns">Cornflower Blue (JS Puns shirt only)</option>
+            <option value="darkslategrey" data-theme="puns">Dark Slate Grey (JS Puns shirt only)</option> 
+            <option value="gold" data-theme="puns">Gold (JS Puns shirt only)</option> 
+            <option value="tomato" data-theme="heart">Tomato (I &#9829; JS shirt only)</option>
+            <option value="steelblue" data-theme="heart">Steel Blue (I &#9829; JS shirt only)</option> 
+            <option value="dimgrey" data-theme="heart">Dim Grey (I &#9829; JS shirt only)</option> 
           </select>
         </div>                
       </fieldset>
@@ -92,7 +93,7 @@
         <label for="payment">I'm going to pay with:</label>
         <select id="payment" name="user_payment">
           <option value="select_method">Select Payment Method</option>
-          <option value="credit card">Credit Card</option>
+          <option value="credit_card" selected>Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bitcoin">Bitcoin</option>
         </select>
@@ -139,11 +140,11 @@
           </select> 	                  	         
         </div>
 
-        <div>
+        <div id="paypal">
         	<p>If you selected the PayPal option we'll take you to Paypal's site to set up your billing information, when you click “Register” below.</p>
         </div> 
 
-        <div>
+        <div id="bitcoin">
         	<p>If you selected the Bitcoin option we'll take you to the Coinbase site to set up your billing information. Due to the nature of exchanging Bitcoin, all Bitcoin transactions will be final.</p>
         </div>                  
 
