@@ -19,7 +19,6 @@ $titleSelect.change(function () {
   }
 });
 
-// Hides the color dropdown until a theme is chosen
 if ($('#design > option:selected').val() === 'select') {
   $('#color').hide();
   $('label[for="color"]').hide();
