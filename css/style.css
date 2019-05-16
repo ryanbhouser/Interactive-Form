@@ -71,6 +71,8 @@ legend {
 	padding-top: .5em;
 	border-top: 2px solid #8f26eb;
 	margin-bottom: 1.125em;
+	font-family: 'Sriracha', cursive;
+	font-size: 1.4rem;
 }
 
 input[type="text"],
