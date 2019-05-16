@@ -100,38 +100,44 @@ $paymentSelect.change(function () {
 $("form").submit(function(e){
   // Name validation
   if ($nameInput.val() == '') {
-    alert('name?');
     $nameInput.css('borderColor', 'red');
     e.preventDefault(e);
   }
   // email validation
   if (emailRegex.test($emailInput.val()) == false) {
-    alert('wrong email');
     $emailInput.css('borderColor', 'red');
     e.preventDefault(e);
   }
   // checkbox validation
   if($('input:checkbox:checked').length < 1) {
     $('input:checkbox').css('borderColor', 'red');
-    alert('Please select at least one checkbox');
     e.preventDefault(e);
   }
   // credit card validation
-  if($('option[val="credit_card"]').prop('selected') == true) {
+  if($('option[value="credit_card"]').prop('selected') === true) {
     if(ccNumRegex.test($('#cc-num').val()) == false) {
       $('#cc-num').css('borderColor', 'red');
-      alert('ccnum');
       e.preventDefault(e);
     }
     if(zipRegex.test($('#zip').val()) == false) {
       $('#zip').css('borderColor', 'red');
-      alert('zip');
       e.preventDefault(e);
     }
     if (cvvRegex.test($('#cvv').val()) == false) {
       $('#cvv').css('borderColor', 'red');
-      alert('cvv');
       e.preventDefault(e);
     }
+  }
+  // Other job field validation
+  if($('option[value="other"]').prop('selected') === true) {
+    if($('#other-title').val() == '') {
+      console.log('enter a job in other');
+      e.preventDefault(e);
+    }
+  }
+  // T-shirt design validation
+  if($('option[value="select"]').prop('selected') === true) {
+    console.log('enter a t-shirt in other');
+    e.preventDefault(e);
   }
 });
