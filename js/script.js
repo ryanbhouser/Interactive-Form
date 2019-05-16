@@ -6,6 +6,8 @@ const $designSelect = $('#design');
 const $colorSelect = $('#color');
 const $paymentSelect = $('#payment');
 
+const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
+
 // First text field in focus on page load
 $nameInput.focus();
 
@@ -93,8 +95,15 @@ $paymentSelect.change(function () {
 
 // Prevent form submits...
 $("form").submit(function(e){
-  if ($nameInput.val() == '' || 
-      $emailInput.val() =='') {
+  if ($nameInput.val() == '') {
+    alert('name?');
     e.preventDefault(e);
+  }
+  if (emailRegex.test($emailInput.val()) == false) {
+    alert('wrong email');
+    e.preventDefault(e);
+  }
+  if( $('input:checkbox:checked').length < 1) {
+    alert('Please select at least one checkbox');
   }
 });
