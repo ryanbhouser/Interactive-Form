@@ -1,26 +1,22 @@
-const $nameInput = $('#name');
-const $emailInput = $('#mail');
-const $titleSelect = $('#title');
-const $otherTitleInput = $('#other-title');
-const $designSelect = $('#design');
-const $colorSelect = $('#color');
-const $paymentSelect = $('#payment');
-
+const nameInput = $('#name');
+const titleSelect = $('#title');
+const otherTitleInput = $('#other-title');
+const paymentDropDown = $('#payment');
 const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
 const ccNumRegex = /^\d{13,16}$/;
 const zipRegex = /\d{5}/;
 const cvvRegex = /\d{3}/;
 
 // First text field in focus on page load
-$nameInput.focus();
+nameInput.focus();
 
 // Hides otherTitleInput & shows it if it is selected
-$otherTitleInput.hide();
-$titleSelect.change(function () {
+otherTitleInput.hide();
+titleSelect.change(function () {
   if ($(this).val() === 'other') {
-    $otherTitleInput.show();
+    otherTitleInput.show();
   } else {
-    $otherTitleInput.hide();
+    otherTitleInput.hide();
   }
 });
 
@@ -72,11 +68,10 @@ $('#design').change(function() {
   }
 });
 
-
 // Display correct payment information/inputs
 $('#paypal').hide(); 
 $('#bitcoin').hide();
-$paymentSelect.change(function () {
+paymentDropDown.change(function () {
   if ($(this).val() === 'select_method') {
     $('#credit-card').hide();
     $('#paypal').hide(); 
@@ -96,53 +91,158 @@ $paymentSelect.change(function () {
   }  
 });
 
-// Prevent form submits...
-$("form").submit(function(e){
-  // Name validation
-  if ($nameInput.val() == '') {
-    $nameInput.css('borderColor', 'red');
-    e.preventDefault(e);
+////////////////////////////////////////////
+// Name validation
+////////////////////////////////////////////
+function validName() {
+  if (nameInput.val().length > 0 ) {
+    nameInput.css('borderColor', 'green');
+    return true;
   }
-  // email validation
-  if (emailRegex.test($emailInput.val()) == false) {
-    $emailInput.css('borderColor', 'red');
-    e.preventDefault(e);
+  nameInput.css('borderColor', 'red');
+  return false;
+}
+
+////////////////////////////////////////////
+// Email validation
+////////////////////////////////////////////
+function validEmail() {
+  const emailInput = $('#mail');
+  if (emailRegex.test(emailInput.val()) == true) {
+    emailInput.css('borderColor', 'green');
+    return true;
   }
-  // checkbox validation
-  if($('input:checkbox:checked').length < 1) {
-    $('input:checkbox').css('boxShadow', '0 0 1px red');
-    e.preventDefault(e);
+  emailInput.css('borderColor', 'red');
+  return false;
+}
+
+////////////////////////////////////////////
+// Other job field validation
+////////////////////////////////////////////
+function validOtherJob() {
+  const otherDropDown = $('option[value="other"]');
+  if (otherDropDown.prop('selected') === true) {
+    if (otherTitleInput.val() === '') {
+      otherTitleInput.css('borderColor', 'red');
+      return false;
+    }
+    otherTitleInput.css('borderColor', 'green');
+    return true;
   }
-  // credit card validation
+}
+
+////////////////////////////////////////////
+// T-shirt design selection validation
+////////////////////////////////////////////
+function validShirtChoice() {
+  const designDropDown = $('#design');
+  const designSelect = $('option[value="select"]');
+  if (designSelect.prop('selected') === true) {
+    designDropDown.css('borderColor', 'red');
+    return false
+  }
+  designDropDown.css('borderColor', 'green');
+  return true;
+}
+
+////////////////////////////////////////////
+// Checkbox validation
+////////////////////////////////////////////
+function validActivities() {
+  const activityCheckboxes = $('input:checkbox');
+  if ($('input:checkbox:checked').length > 0) {
+    return true;
+  }
+  activityCheckboxes.css('boxShadow', '0 0 1px red');
+  return false;
+}
+
+////////////////////////////////////////////
+// Payment choice selection validation
+////////////////////////////////////////////
+function validPayment() {
+  
+  const paymentSelect = $('option[value="select_method"]');
+  if (paymentSelect.prop('selected') === true) {
+    paymentDropDown.css('borderColor', 'red');
+    return false;
+  }
+  paymentDropDown.css('borderColor', 'green');
+  return true;
+}
+
+////////////////////////////////////////////
+// CC Number validation
+////////////////////////////////////////////
+function validCC() {
+  const cc = $('#cc-num');
+  if (ccNumRegex.test(cc.val()) == true) {
+    cc.css('borderColor', 'green');
+    return true;
+  }
+  cc.css('borderColor', 'red');
+  return false;
+}
+
+////////////////////////////////////////////
+// Zip validation
+////////////////////////////////////////////
+function validZip() {
+  const zip = $('#zip');
+  if (zipRegex.test(zip.val()) == true) {
+    zip.css('borderColor', 'green');
+    return true;
+  }
+  zip.css('borderColor', 'red');
+  return false;
+}
+
+////////////////////////////////////////////
+// CVV validation
+////////////////////////////////////////////
+function validCVV() {
+  const cvv = $('#cvv');
+  if (cvvRegex.test(cvv.val()) == true) {
+    cvv.css('borderColor', 'green');
+    return true;
+  }
+  cvv.css('borderColor', 'red');
+  return false;
+}
+
+////////////////////////////////////////////
+// Validate the form as a whole
+////////////////////////////////////////////
+function validateForm() {
+  const validator = [];
+  validator.push(validName());
+  validator.push(validEmail());
+  if ($('option[value="other"]').prop('selected') === true) {
+    validator.push(validOtherJob());
+  }
+  validator.push(validShirtChoice());
+  validator.push(validActivities());
+  if ($('option[value="select_method"]').prop('selected') === true) {
+    validator.push(validPayment());
+  }
   if($('option[value="credit_card"]').prop('selected') === true) {
-    if(ccNumRegex.test($('#cc-num').val()) == false) {
-      $('#cc-num').css('borderColor', 'red');
-      e.preventDefault(e);
-    }
-    if(zipRegex.test($('#zip').val()) == false) {
-      $('#zip').css('borderColor', 'red');
-      e.preventDefault(e);
-    }
-    if (cvvRegex.test($('#cvv').val()) == false) {
-      $('#cvv').css('borderColor', 'red');
-      e.preventDefault(e);
-    }
+    validator.push(validCC());
+    validator.push(validZip());
+    validator.push(validCVV());
   }
-  // Payment type selected validation
-  if($('option[value="select_method"]').prop('selected') === true) {
-    $('#payment').css('borderColor', 'red');
-    e.preventDefault(e);
-  }
-  // Other job field validation
-  if($('option[value="other"]').prop('selected') === true) {
-    if($('#other-title').val() == '') {
-      $('#other-title').css('borderColor', 'red');
-      e.preventDefault(e);
+  for (let i = 0; i < validator.length; i++) {
+    if (validator[i] === false) {
+      return false;
     }
-  }
-  // T-shirt design validation
-  if($('option[value="select"]').prop('selected') === true) {
-    $('#design').css('borderColor', 'red');
-    e.preventDefault(e);
+  }  
+}
+
+////////////////////////////////////////////
+// Keep form from submiting if invalid
+////////////////////////////////////////////
+$('form').submit(function(e) {
+  if (validateForm() === false) {
+    e.preventDefault();
+    return false;
   }
 });

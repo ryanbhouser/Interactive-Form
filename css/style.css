@@ -101,14 +101,14 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #d3c2fd;
-	border: 2px solid #d3c2fd;
+	background: #eee8ff;
+	border: 2px solid #eee8ff;
 	outline: none;
 }
 
 input:focus {
 	background: #fff;
-	border-color: #d3c2fd;
+	border-color: #dfd3ff;
 	transition: border-color .4s, background-color .4s;
 }
 
@@ -156,6 +156,13 @@ button:hover {
 
 .credit-card {
 	margin-top: 1.25em;
+}
+
+.error {
+	color: red;
+	font-size: .7rem;
+	font-style: italic;
+	margin-top: -1rem; 
 }
 
 /* ================================= 
