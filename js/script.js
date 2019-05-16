@@ -110,7 +110,7 @@ $("form").submit(function(e){
   }
   // checkbox validation
   if($('input:checkbox:checked').length < 1) {
-    $('input:checkbox').css('borderColor', 'red');
+    $('input:checkbox').css('boxShadow', '0 0 1px red');
     e.preventDefault(e);
   }
   // credit card validation
@@ -131,13 +131,13 @@ $("form").submit(function(e){
   // Other job field validation
   if($('option[value="other"]').prop('selected') === true) {
     if($('#other-title').val() == '') {
-      console.log('enter a job in other');
+      $('#other-title').css('borderColor', 'red');
       e.preventDefault(e);
     }
   }
   // T-shirt design validation
   if($('option[value="select"]').prop('selected') === true) {
-    console.log('enter a t-shirt in other');
+    $('#design').css('borderColor', 'red');
     e.preventDefault(e);
   }
 });
