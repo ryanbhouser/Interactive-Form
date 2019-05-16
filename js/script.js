@@ -7,6 +7,9 @@ const $colorSelect = $('#color');
 const $paymentSelect = $('#payment');
 
 const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
+const ccNumRegex = /^\d{13,16}$/;
+const zipRegex = /\d{5}/;
+const cvvRegex = /\d{3}/;
 
 // First text field in focus on page load
 $nameInput.focus();
@@ -95,15 +98,40 @@ $paymentSelect.change(function () {
 
 // Prevent form submits...
 $("form").submit(function(e){
+  // Name validation
   if ($nameInput.val() == '') {
     alert('name?');
+    $nameInput.css('borderColor', 'red');
     e.preventDefault(e);
   }
+  // email validation
   if (emailRegex.test($emailInput.val()) == false) {
     alert('wrong email');
+    $emailInput.css('borderColor', 'red');
     e.preventDefault(e);
   }
-  if( $('input:checkbox:checked').length < 1) {
+  // checkbox validation
+  if($('input:checkbox:checked').length < 1) {
+    $('input:checkbox').css('borderColor', 'red');
     alert('Please select at least one checkbox');
+    e.preventDefault(e);
+  }
+  // credit card validation
+  if($('option[val="credit_card"]').prop('selected') == true) {
+    if(ccNumRegex.test($('#cc-num').val()) == false) {
+      $('#cc-num').css('borderColor', 'red');
+      alert('ccnum');
+      e.preventDefault(e);
+    }
+    if(zipRegex.test($('#zip').val()) == false) {
+      $('#zip').css('borderColor', 'red');
+      alert('zip');
+      e.preventDefault(e);
+    }
+    if (cvvRegex.test($('#cvv').val()) == false) {
+      $('#cvv').css('borderColor', 'red');
+      alert('cvv');
+      e.preventDefault(e);
+    }
   }
 });
