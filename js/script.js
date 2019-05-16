@@ -128,6 +128,11 @@ $("form").submit(function(e){
       e.preventDefault(e);
     }
   }
+  // Payment type selected validation
+  if($('option[value="select_method"]').prop('selected') === true) {
+    $('#payment').css('borderColor', 'red');
+    e.preventDefault(e);
+  }
   // Other job field validation
   if($('option[value="other"]').prop('selected') === true) {
     if($('#other-title').val() == '') {
