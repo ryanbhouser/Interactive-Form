@@ -7,6 +7,7 @@ const designSelect = $('option[value="select"]');
 const paymentDropDown = $('#payment');
 const paymentSelect = $('option[value="select_method"]');
 const activitiesSection = $('.activities');
+const activityCheckboxes = $('input:checkbox');
 const totalCostDiv = $('.total-cost');
 let totalCost = 0;
 const cc = $('#cc-num');
@@ -193,7 +194,6 @@ function validShirtChoice() {
 
 // Checkbox validation
 function validActivities() {
-  const activityCheckboxes = $('input:checkbox');
   if ($('input:checkbox:checked').length > 0) {
     return true;
   }
@@ -288,19 +288,7 @@ if ($('#design > option:selected').val() === 'select') {
 }
 
 // Conditional error messages
-$('form').submit(function(e) {
-  if (cc.val() === '') {
-    const errorCC = $('.error-cc');
-    const err = 'Please enter a valid credit card number';
-    errorCC.text(err);
-  } else if (cc.value.length > 0) {
-    if (validCC() === false) {
-      const errorCC = $('.error-cc');
-      const err = 'Please enter a number that is between 13 and 16 digits long';
-      errorCC.text(err);
-    }
-  }
-});
+
 
 // Real-time error messages
 // Alerts user email is invalid
@@ -311,23 +299,6 @@ emailInput.keyup(function() {
     errorEmail.text(err);
   } else {
     errorEmail.hide();
-  }
-});
-// Alerts user cc is invalid
-cc.keyup(function() {
-  const errorCC = $('.error-cc');
-  if (cc.val() === '') {
-    const errorCC = $('.error-cc');
-    const err = 'Please enter a valid credit card number';
-    errorCC.text(err);
-  } else if (cc.value.length > 0) {
-    if (validCC() === false) {
-      const errorCC = $('.error-cc');
-      const err = 'Please enter a number that is between 13 and 16 digits long';
-      errorCC.text(err);
-    }
-  } else {
-    errorCC.hide();
   }
 });
 // Alerts user zip is invalid
@@ -377,3 +348,7 @@ paymentDropDown.change(function() {
   paymentDropDown.css('borderColor', 'grey');
   return true;
 })
+
+activityCheckboxes.change(function() {
+  activityCheckboxes.css('boxShadow', 'none');
+});
