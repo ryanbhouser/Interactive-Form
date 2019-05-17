@@ -2,7 +2,10 @@ const nameInput = $('#name');
 const emailInput = $('#mail');
 const titleSelect = $('#title');
 const otherTitleInput = $('#other-title');
+const designDropDown = $('#design');
+const designSelect = $('option[value="select"]');
 const paymentDropDown = $('#payment');
+const paymentSelect = $('option[value="select_method"]');
 const activitiesSection = $('.activities');
 const totalCostDiv = $('.total-cost');
 let totalCost = 0;
@@ -200,8 +203,6 @@ function validActivities() {
 
 // Payment choice selection validation
 function validPayment() {
-  
-  const paymentSelect = $('option[value="select_method"]');
   if (paymentSelect.prop('selected') === true) {
     paymentDropDown.css('borderColor', 'red');
     return false;
@@ -287,9 +288,22 @@ if ($('#design > option:selected').val() === 'select') {
 }
 
 // Conditional error messages
-
+$('form').submit(function(e) {
+  if (cc.val() === '') {
+    const errorCC = $('.error-cc');
+    const err = 'Please enter a valid credit card number';
+    errorCC.text(err);
+  } else if (cc.value.length > 0) {
+    if (validCC() === false) {
+      const errorCC = $('.error-cc');
+      const err = 'Please enter a number that is between 13 and 16 digits long';
+      errorCC.text(err);
+    }
+  }
+});
 
 // Real-time error messages
+// Alerts user email is invalid
 emailInput.keyup(function() {
   const errorEmail = $('.error-email');
   if (validEmail() === false) {
@@ -299,17 +313,24 @@ emailInput.keyup(function() {
     errorEmail.hide();
   }
 });
-
+// Alerts user cc is invalid
 cc.keyup(function() {
   const errorCC = $('.error-cc');
-  if (validCC() === false) {
+  if (cc.val() === '') {
+    const errorCC = $('.error-cc');
     const err = 'Please enter a valid credit card number';
     errorCC.text(err);
+  } else if (cc.value.length > 0) {
+    if (validCC() === false) {
+      const errorCC = $('.error-cc');
+      const err = 'Please enter a number that is between 13 and 16 digits long';
+      errorCC.text(err);
+    }
   } else {
     errorCC.hide();
   }
 });
-
+// Alerts user zip is invalid
 zip.keyup(function() {
   const errorZip = $('.error-zip');
   if (validZip() === false) {
@@ -319,7 +340,7 @@ zip.keyup(function() {
     errorZip.hide();
   }
 });
-
+// Alerts user cvv is invalid
 cvv.keyup(function() {
   const errorCVV = $('.error-cvv');
   if (validCVV() === false) {
@@ -329,3 +350,30 @@ cvv.keyup(function() {
     errorCVV.hide();
   }
 });
+
+// The following functions will reset some border styles. This is useful if a user submitted the form and get validation errors, those errors will clear upon entering the correct information
+nameInput.keyup(function() {
+  nameInput.css('borderColor', '#eee8ff');
+});
+
+otherTitleInput.keyup(function() {
+  otherTitleInput.css('borderColor', '#eee8ff');
+});
+
+designDropDown.change(function() {
+  if (designSelect.prop('selected') === true) {
+    designDropDown.css('borderColor', 'red');
+    return false
+  }
+  designDropDown.css('borderColor', 'grey');
+  return true;
+});
+
+paymentDropDown.change(function() {
+  if (paymentSelect.prop('selected') === true) {
+    paymentDropDown.css('borderColor', 'red');
+    return false
+  }
+  paymentDropDown.css('borderColor', 'grey');
+  return true;
+})
