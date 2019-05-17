@@ -107,13 +107,14 @@ activitiesSection.change(function(e) {
     if (currentLabelText.includes(dayAndTime) && currentLabelText != labelText) {
       if (input.checked) {
         $(inputs[i]).prop('disabled', true);
+        $(inputs[i]).parent().addClass('strike');
       } else {
         $(inputs[i]).prop('disabled', false);
+        $(inputs[i]).parent().removeClass('strike');
       }
     }
   }
 });
-
 
 ////////////////////////////////////////////
 // Payment section
