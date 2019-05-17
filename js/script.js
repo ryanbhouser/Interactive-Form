@@ -30,12 +30,6 @@ titleSelect.change(function () {
 ////////////////////////////////////////////
 // T-shirt design selection
 ////////////////////////////////////////////
-// Hide color until a theme is chosen
-if ($('#design > option:selected').val() === 'select') {
-  $('#color').hide();
-  $('label[for="color"]').hide();
-}
-
 // Determine which color options to display
 $('#design').change(function() {
   let flag = true;
@@ -281,3 +275,14 @@ $('form').submit(function(e) {
     return false;
   }
 });
+
+////////////////////////////////////////////
+// EXTRA CREDIT :)
+////////////////////////////////////////////
+// Hide color dropdown until a theme is chosen
+if ($('#design > option:selected').val() === 'select') {
+  $('#color').hide();
+  $('label[for="color"]').hide();
+}
+
+// Conditional error messages
