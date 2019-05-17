@@ -11,6 +11,7 @@ const activityCheckboxes = $('input:checkbox');
 const totalCostDiv = $('.total-cost');
 let totalCost = 0;
 const cc = $('#cc-num');
+const errorCC = $('.error-cc');
 const zip = $('#zip');
 const cvv = $('#cvv');
 const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
@@ -288,7 +289,15 @@ if ($('#design > option:selected').val() === 'select') {
 }
 
 // Conditional error messages
-
+$('form').submit(function(e) {
+  if (cc.val().length < 1) {
+    const err = 'Oops! You forgot to include a credit card number!';
+    errorCC.text(err);
+  } else {
+    const err = 'Valid credit card numbers have 13-16 digits';
+    errorCC.text(err);
+  }
+});
 
 // Real-time error messages
 // Alerts user email is invalid
@@ -299,6 +308,15 @@ emailInput.keyup(function() {
     errorEmail.text(err);
   } else {
     errorEmail.hide();
+  }
+});
+// Alerts user cc is invalid
+cc.keyup(function() {
+  if (validCC() === false) {
+    const err = 'Please enter a valid credit card number';
+    errorCC.text(err);
+  } else {
+    errorCC.hide();
   }
 });
 // Alerts user zip is invalid
