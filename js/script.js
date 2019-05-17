@@ -87,11 +87,18 @@ activitiesSection.change(function(e) {
   const input = e.target;
   const labelText = $(input).parent().text();
   // Find and store dollar amount
-  const dollar = labelText.indexOf('$');
+  const dollar = labelText.indexOf('$') + 1;
   const dollarAmt = labelText.slice(dollar);
-  parseInt(dollarAmt);
-  
+  const dollarAmtInt = parseInt(dollarAmt);
+  // Update & display the cost
+  if (e.target.checked) {
+    totalCost += dollarAmtInt;
+  } else {
+    totalCost -= dollarAmtInt;
+  }
+  totalCostDiv.text('Total: $' + totalCost);
 });
+
 
 ////////////////////////////////////////////
 // Payment section
