@@ -91,12 +91,27 @@ activitiesSection.change(function(e) {
   const dollarAmt = labelText.slice(dollar);
   const dollarAmtInt = parseInt(dollarAmt);
   // Update & display the cost
-  if (e.target.checked) {
+  if (input.checked) {
     totalCost += dollarAmtInt;
   } else {
     totalCost -= dollarAmtInt;
   }
   totalCostDiv.text('Total: $' + totalCost);
+  // Disable conflicting activities
+  const dash = labelText.indexOf('—');
+  const comma = labelText.indexOf(',');
+  const dayAndTime = labelText.slice(dash, comma);
+  const inputs = $('.activities input');
+  for (let i = 0; i < inputs.length; i++) {
+    let currentLabelText = $(inputs[i]).parent().text();
+    if (currentLabelText.includes(dayAndTime) && currentLabelText != labelText) {
+      if (input.checked) {
+        $(inputs[i]).prop('disabled', true);
+      } else {
+        $(inputs[i]).prop('disabled', false);
+      }
+    }
+  }
 });
 
 
