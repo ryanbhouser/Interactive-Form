@@ -319,26 +319,6 @@ cc.keyup(function() {
     errorCC.hide();
   }
 });
-// Alerts user zip is invalid
-zip.keyup(function() {
-  const errorZip = $('.error-zip');
-  if (validZip() === false) {
-    const err = 'Please enter a valid zip code';
-    errorZip.text(err);
-  } else {
-    errorZip.hide();
-  }
-});
-// Alerts user cvv is invalid
-cvv.keyup(function() {
-  const errorCVV = $('.error-cvv');
-  if (validCVV() === false) {
-    const err = 'Please enter a valid cvv';
-    errorCVV.text(err);
-  } else {
-    errorCVV.hide();
-  }
-});
 
 // The following functions will reset some border styles. This is useful if a user submitted the form and get validation errors, those errors will clear upon entering the correct information
 nameInput.keyup(function() {
@@ -370,3 +350,15 @@ paymentDropDown.change(function() {
 activityCheckboxes.change(function() {
   activityCheckboxes.css('boxShadow', 'none');
 });
+
+zip.keyup(function() {
+  if (zipRegex.test(zip.val()) == true) {
+    zip.css('borderColor', '#eee8ff');
+  }
+})
+
+cvv.keyup(function() {
+  if (cvvRegex.test(cvv.val()) == true) {
+    cvv.css('borderColor', '#eee8ff');
+  }
+})
