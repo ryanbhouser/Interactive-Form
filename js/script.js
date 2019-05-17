@@ -2,6 +2,9 @@ const nameInput = $('#name');
 const titleSelect = $('#title');
 const otherTitleInput = $('#other-title');
 const paymentDropDown = $('#payment');
+const activitiesSection = $('.activities');
+const totalCostDiv = $('.total-cost');
+let totalCost = 0;
 const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
 const ccNumRegex = /^\d{13,16}$/;
 const zipRegex = /\d{5}/;
@@ -74,6 +77,20 @@ $('#design').change(function() {
     $('#color').hide();
     $('label[for="color"]').hide();
   }
+});
+
+////////////////////////////////////////////
+// Activity section
+////////////////////////////////////////////
+activitiesSection.change(function(e) {
+  // Listen for checks
+  const input = e.target;
+  const labelText = $(input).parent().text();
+  // Find and store dollar amount
+  const dollar = labelText.indexOf('$');
+  const dollarAmt = labelText.slice(dollar);
+  parseInt(dollarAmt);
+  
 });
 
 ////////////////////////////////////////////
