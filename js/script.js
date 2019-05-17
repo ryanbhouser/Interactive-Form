@@ -7,10 +7,14 @@ const ccNumRegex = /^\d{13,16}$/;
 const zipRegex = /\d{5}/;
 const cvvRegex = /\d{3}/;
 
-// First text field in focus on page load
+////////////////////////////////////////////
+// Focus on name input
+////////////////////////////////////////////
 nameInput.focus();
 
-// Hides otherTitleInput & shows it if it is selected
+////////////////////////////////////////////
+// Toggle "other" input field
+////////////////////////////////////////////
 otherTitleInput.hide();
 titleSelect.change(function () {
   if ($(this).val() === 'other') {
@@ -20,6 +24,10 @@ titleSelect.change(function () {
   }
 });
 
+////////////////////////////////////////////
+// T-shirt design selection
+////////////////////////////////////////////
+// Hide color until a theme is chosen
 if ($('#design > option:selected').val() === 'select') {
   $('#color').hide();
   $('label[for="color"]').hide();
@@ -68,7 +76,9 @@ $('#design').change(function() {
   }
 });
 
-// Display correct payment information/inputs
+////////////////////////////////////////////
+// Payment section
+////////////////////////////////////////////
 $('#paypal').hide(); 
 $('#bitcoin').hide();
 paymentDropDown.change(function () {
@@ -92,8 +102,9 @@ paymentDropDown.change(function () {
 });
 
 ////////////////////////////////////////////
-// Name validation
+// Validation messages
 ////////////////////////////////////////////
+// Name validation
 function validName() {
   if (nameInput.val().length > 0 ) {
     nameInput.css('borderColor', 'green');
@@ -103,9 +114,7 @@ function validName() {
   return false;
 }
 
-////////////////////////////////////////////
 // Email validation
-////////////////////////////////////////////
 function validEmail() {
   const emailInput = $('#mail');
   if (emailRegex.test(emailInput.val()) == true) {
@@ -116,9 +125,7 @@ function validEmail() {
   return false;
 }
 
-////////////////////////////////////////////
 // Other job field validation
-////////////////////////////////////////////
 function validOtherJob() {
   const otherDropDown = $('option[value="other"]');
   if (otherDropDown.prop('selected') === true) {
@@ -131,9 +138,7 @@ function validOtherJob() {
   }
 }
 
-////////////////////////////////////////////
 // T-shirt design selection validation
-////////////////////////////////////////////
 function validShirtChoice() {
   const designDropDown = $('#design');
   const designSelect = $('option[value="select"]');
@@ -145,9 +150,7 @@ function validShirtChoice() {
   return true;
 }
 
-////////////////////////////////////////////
 // Checkbox validation
-////////////////////////////////////////////
 function validActivities() {
   const activityCheckboxes = $('input:checkbox');
   if ($('input:checkbox:checked').length > 0) {
@@ -157,9 +160,7 @@ function validActivities() {
   return false;
 }
 
-////////////////////////////////////////////
 // Payment choice selection validation
-////////////////////////////////////////////
 function validPayment() {
   
   const paymentSelect = $('option[value="select_method"]');
@@ -171,9 +172,7 @@ function validPayment() {
   return true;
 }
 
-////////////////////////////////////////////
 // CC Number validation
-////////////////////////////////////////////
 function validCC() {
   const cc = $('#cc-num');
   if (ccNumRegex.test(cc.val()) == true) {
@@ -184,9 +183,7 @@ function validCC() {
   return false;
 }
 
-////////////////////////////////////////////
 // Zip validation
-////////////////////////////////////////////
 function validZip() {
   const zip = $('#zip');
   if (zipRegex.test(zip.val()) == true) {
@@ -197,9 +194,7 @@ function validZip() {
   return false;
 }
 
-////////////////////////////////////////////
 // CVV validation
-////////////////////////////////////////////
 function validCVV() {
   const cvv = $('#cvv');
   if (cvvRegex.test(cvv.val()) == true) {
@@ -211,7 +206,7 @@ function validCVV() {
 }
 
 ////////////////////////////////////////////
-// Validate the form as a whole
+// Form validation
 ////////////////////////////////////////////
 function validateForm() {
   const validator = [];
