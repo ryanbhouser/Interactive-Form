@@ -26,7 +26,9 @@
         <input type="text" id="name" name="user_name">
         
         <label for="mail">Email:</label>
+        <div class="error error-email"></div>
         <input type="email" id="mail" name="user_email">
+        
         
         <label for="title">Job Role</label>
         <select id="title" name="user_title">
@@ -102,16 +104,19 @@
 
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
+            <div class="error error-cc"></div>
         	  <input id="cc-num" name="user_cc-num" type="text">
           </div>
 
           <div class="col-3 col">
             <label for="zip">Zip Code:</label>
+            <div class="error error-zip"></div>
             <input id="zip" name="user_zip" type="text"> 
           </div>
 
           <div class="col-3 col">
             <label for="cvv">CVV:</label>
+            <div class="error error-cvv"></div>
             <input id="cvv" name="user_cvv" type="text"> 
           </div>
 

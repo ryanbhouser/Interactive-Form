@@ -1,10 +1,14 @@
 const nameInput = $('#name');
+const emailInput = $('#mail');
 const titleSelect = $('#title');
 const otherTitleInput = $('#other-title');
 const paymentDropDown = $('#payment');
 const activitiesSection = $('.activities');
 const totalCostDiv = $('.total-cost');
 let totalCost = 0;
+const cc = $('#cc-num');
+const zip = $('#zip');
+const cvv = $('#cvv');
 const emailRegex = /[^@]+@[^@.]+\.[a-z]+/i;
 const ccNumRegex = /^\d{13,16}$/;
 const zipRegex = /\d{5}/;
@@ -141,7 +145,7 @@ paymentDropDown.change(function () {
 // Name validation
 function validName() {
   if (nameInput.val().length > 0 ) {
-    nameInput.css('borderColor', 'green');
+    nameInput.css('borderColor', '#eee8ff');
     return true;
   }
   nameInput.css('borderColor', 'red');
@@ -152,7 +156,7 @@ function validName() {
 function validEmail() {
   const emailInput = $('#mail');
   if (emailRegex.test(emailInput.val()) == true) {
-    emailInput.css('borderColor', 'green');
+    emailInput.css('borderColor', '#eee8ff');
     return true;
   }
   emailInput.css('borderColor', 'red');
@@ -167,7 +171,7 @@ function validOtherJob() {
       otherTitleInput.css('borderColor', 'red');
       return false;
     }
-    otherTitleInput.css('borderColor', 'green');
+    otherTitleInput.css('borderColor', '#eee8ff');
     return true;
   }
 }
@@ -180,7 +184,7 @@ function validShirtChoice() {
     designDropDown.css('borderColor', 'red');
     return false
   }
-  designDropDown.css('borderColor', 'green');
+  designDropDown.css('borderColor', '#eee8ff');
   return true;
 }
 
@@ -202,15 +206,14 @@ function validPayment() {
     paymentDropDown.css('borderColor', 'red');
     return false;
   }
-  paymentDropDown.css('borderColor', 'green');
+  paymentDropDown.css('borderColor', '#eee8ff');
   return true;
 }
 
 // CC Number validation
 function validCC() {
-  const cc = $('#cc-num');
   if (ccNumRegex.test(cc.val()) == true) {
-    cc.css('borderColor', 'green');
+    cc.css('borderColor', '#eee8ff');
     return true;
   }
   cc.css('borderColor', 'red');
@@ -219,9 +222,8 @@ function validCC() {
 
 // Zip validation
 function validZip() {
-  const zip = $('#zip');
   if (zipRegex.test(zip.val()) == true) {
-    zip.css('borderColor', 'green');
+    zip.css('borderColor', '#eee8ff');
     return true;
   }
   zip.css('borderColor', 'red');
@@ -230,9 +232,8 @@ function validZip() {
 
 // CVV validation
 function validCVV() {
-  const cvv = $('#cvv');
   if (cvvRegex.test(cvv.val()) == true) {
-    cvv.css('borderColor', 'green');
+    cvv.css('borderColor', '#eee8ff');
     return true;
   }
   cvv.css('borderColor', 'red');
@@ -286,3 +287,45 @@ if ($('#design > option:selected').val() === 'select') {
 }
 
 // Conditional error messages
+
+
+// Real-time error messages
+emailInput.keyup(function() {
+  const errorEmail = $('.error-email');
+  if (validEmail() === false) {
+    const err = 'Please enter a valid email';
+    errorEmail.text(err);
+  } else {
+    errorEmail.hide();
+  }
+});
+
+cc.keyup(function() {
+  const errorCC = $('.error-cc');
+  if (validCC() === false) {
+    const err = 'Please enter a valid credit card number';
+    errorCC.text(err);
+  } else {
+    errorCC.hide();
+  }
+});
+
+zip.keyup(function() {
+  const errorZip = $('.error-zip');
+  if (validZip() === false) {
+    const err = 'Please enter a valid zip code';
+    errorZip.text(err);
+  } else {
+    errorZip.hide();
+  }
+});
+
+cvv.keyup(function() {
+  const errorCVV = $('.error-cvv');
+  if (validCVV() === false) {
+    const err = 'Please enter a valid cvv';
+    errorCVV.text(err);
+  } else {
+    errorCVV.hide();
+  }
+});
